@@ -39,6 +39,10 @@ struct MissionView: View {
                         .frame(maxWidth: geometry.size.width * 0.6)
                         .padding(.top)
                     
+                    Text(mission.formattedLaunchDate)
+                        .font(.title2)
+                        .foregroundColor(.white)
+                    
                     VStack(alignment: .leading) {
                         Rectangle()
                             .frame(height: 2)
@@ -63,17 +67,18 @@ struct MissionView: View {
                             HStack {
                                 ForEach(crew, id: \.role) { crewMember in
                                     NavigationLink {
-                                        Text("Astronaut details")
+                                        AstronautView(astronaut: crewMember.astronaut)
                                     } label: {
                                         HStack {
                                             Image(crewMember.astronaut.id)
                                                 .resizable()
                                                 .clipped()
                                                 .clipShape(Rectangle())
-                                                .frame(width:150, height: 100)
+                                                .frame(width: geometry.size.width * 0.3, height: 90)
+                                
                                                 .overlay (
                                                     Rectangle()
-                                                        .strokeBorder(crewMember.role == "Commander" ? .yellow : .white, lineWidth: 3)
+                                                        .strokeBorder(crewMember.role == "Commander" ? .yellow : .white, lineWidth: 2)
                                                 )
                                                
                                                 
